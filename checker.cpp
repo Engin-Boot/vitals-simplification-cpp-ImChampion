@@ -1,18 +1,10 @@
 #include <assert.h>
-
-/*bool bpmIsOk(float bpm) {
-  return (bpm >= 70 && bpm <= 150);
-}
-bool spo2IsOk(float spo2) {
-  return (spo2 >= 90);
-}
-bool respRateIsOk(float respRate) {
-  return (respRate >= 30 && respRate <= 95);
-}*/
+#include<iostream>
+using namespace std;
 
 bool vitalisInsideLimit(float value,int lowerlimit, int upperlimit)
 {
-    return (value>=lowerlimit && value<=upperlimit);
+    return (value > lowerlimit && value < upperlimit);
 }
 
 bool vitalsAreOk(float bpm, float spo2, float respRate)
@@ -21,9 +13,17 @@ bool vitalsAreOk(float bpm, float spo2, float respRate)
 }
 
 int main() {
+
+  assert(vitalisInsideLimit(70, 60, 95) == true);
+  assert(vitalisInsideLimit(55, 90, 150) == false); //below lower limit
+  assert(vitalisInsideLimit(170, 95, 150) == false); //above upper limit
+ cout<<"vitalisInsideLimit is Working Function!"<<endl;
+
   assert(vitalsAreOk(80, 95, 60) == true);
-  assert(vitalsAreOk(60, 90, 40) == false);
-  assert(vitalsAreOk(100,91,100) == false);
-  
+  assert(vitalsAreOk(70, 101, 70) == false);
+  assert(vitalsAreOk(160,91,30) == false);
+   cout<<"vitalsAreOk is Working Function!"<<endl;
+
+
   return 0;
 }
