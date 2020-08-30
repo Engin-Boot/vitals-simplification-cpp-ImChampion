@@ -122,8 +122,6 @@ bool vitalsAreOk(float bpm, float spo2, float respRate)
    RangeChecker respChecker("resp rate",70,150,&smsAlerter);
   bpmChecker.checkAgainstRange(bpm);
 
-
-
   return (vitalisInsideLimit(bpm,70,150) &&
            vitalisInsideLimit(spo2,90,100) &&
           vitalisInsideLimit(respRate,30,95));
@@ -132,33 +130,10 @@ bool vitalsAreOk(float bpm, float spo2, float respRate)
 
 int main()
 {
-
     struct vitalParameter parameters{55,91,300,500,500,30,70,80,60};
-    /*parameters.bpm=55;
-    parameters.spo2=91;
-    parameters.respRate=300;*/
-
-
-
-    AlertWithSound alerter;
+     AlertWithSound alerter;
     VitalsIntegrator vitals(&alerter);
-
     vitals.checkAllVitals(parameters);
-
-    //vitals.checkAllVitals(parameters);
-  /*
-  assert(vitalisInsideLimit(70, 60, 95) == true);
-  assert(vitalisInsideLimit(55, 90, 150) == false); //below lower limit
-  assert(vitalisInsideLimit(170, 95, 150) == false); //above upper limit
- //cout<<"vitalisInsideLimit is Working Function!"<<endl;
-
-  assert(vitalsAreOk(80, 95, 60) == true);
-  assert(vitalsAreOk(70, 101, 70) == false);
-  assert(vitalsAreOk(160,91,30) == false);
-   //cout<<"vitalsAreOk is Working Function!"<<endl;
-//---------------------
-
-*/
-
+    
   return 0;
 }
