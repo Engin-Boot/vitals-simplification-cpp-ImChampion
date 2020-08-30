@@ -5,7 +5,7 @@ using namespace std;
 class Alert
 {
     public:
-    virtual void raiseAlert(const char* vitalName,const char* level) ;  //It tell that
+    virtual void raiseAlert(const char* vitalName,const char* level)=0;  //It tell that
 
 };
 class AlertWithSMS: public Alert
