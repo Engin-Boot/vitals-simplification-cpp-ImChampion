@@ -54,9 +54,8 @@ public:
         {
             alerter->raiseAlert(vitalName,"Too Low");
         }
-        else if(value > upper)
-        {
-
+        else
+	{
             alerter->raiseAlert(vitalName,"Too High");
         }
     }
