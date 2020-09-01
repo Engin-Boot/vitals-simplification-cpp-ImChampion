@@ -33,31 +33,43 @@ public:
 class RangeChecker
 {
 private:
-    int lower,upper;
+    float lower,upper;
     const char* vitalName;
     Alert* alerter;
 public:
-    RangeChecker(const char* name,int low,int up,Alert* alerterPtr)
+    RangeChecker(const char* name,float low,float up,Alert* alerterPtr)
     {
         vitalName=name;
         lower=low;
         upper=up;
         alerter=alerterPtr;
     }
+    void lowerboundCheck(float value,float lower)
+    {
+        if(value<=lower)
+        {
+            alerter->raiseAlert(vitalName,"Too Low");
+        }
+    }
+
+    void upperboundCheck(float value,float upper)
+    {
+        if(value>=upper)
+        {
+            alerter->raiseAlert(vitalName,"Too High");
+        }
+    }
+
     void checkAgainstRange(float value)
     {
         if (value == 0)
         {
             cout<<vitalName<<" not measured"<<endl;
+            return;
         }
-        else if(value < lower)
-        {
-            alerter->raiseAlert(vitalName,"Too Low");
-        }
-        else
-	{
-            alerter->raiseAlert(vitalName,"Too High");
-        }
+        lowerboundCheck(value,lower);
+
+        upperboundCheck(value,upper);
     }
 
 };
@@ -87,29 +99,15 @@ public:
 
     void checkAllVitals(map<string,int> &parameters)
     {
-
-			bpmChecker.checkAgainstRange(parameters["bpm"]);
-
-
-			spo2Checker.checkAgainstRange(parameters["spo2"]);
-
-			respRateChecker.checkAgainstRange(parameters["respRate"]);
-
-			ecgChecker.checkAgainstRange(parameters["ecg"]);
-
-
-			bodyTempChecker.checkAgainstRange(parameters["bodyTemp"]);
-
-
-			glucoseChecker.checkAgainstRange(parameters["glucose"]);
-
-
-			bloodPressureChecker.checkAgainstRange(parameters["bloodPressure"]);
-
-
-			eegChecker.checkAgainstRange(parameters["eeg"]);
-
-			heartRateChecker.checkAgainstRange(parameters["heartRate"]);
+    bpmChecker.checkAgainstRange(parameters["bpm"]);
+    spo2Checker.checkAgainstRange(parameters["spo2"]);
+    respRateChecker.checkAgainstRange(parameters["respRate"]);
+    ecgChecker.checkAgainstRange(parameters["ecg"]);
+    bodyTempChecker.checkAgainstRange(parameters["bodyTemp"]);
+    glucoseChecker.checkAgainstRange(parameters["glucose"]);
+    bloodPressureChecker.checkAgainstRange(parameters["bloodPressure"]);
+    eegChecker.checkAgainstRange(parameters["eeg"]);
+    heartRateChecker.checkAgainstRange(parameters["heartRate"]);
     }
 };
 
