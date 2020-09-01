@@ -46,9 +46,12 @@ public:
     }
     void checkAgainstRange(float value)
     {
-        if(value < lower)
+        if (value == 0)
         {
-
+            cout<<vitalName<<" not measured"<<endl;
+        }
+        else if(value < lower)
+        {
             alerter->raiseAlert(vitalName,"Too Low");
         }
         else if(value > upper)
@@ -85,32 +88,28 @@ public:
 
     void checkAllVitals(map<string,int> &parameters)
     {
-        //cout<<parameters["heartRate"];
-		if(parameters["bpm"])
+
 			bpmChecker.checkAgainstRange(parameters["bpm"]);
 
-		if(parameters["spo2"])
+
 			spo2Checker.checkAgainstRange(parameters["spo2"]);
 
-		if(parameters["respRate"])
 			respRateChecker.checkAgainstRange(parameters["respRate"]);
 
-		if(parameters["ecg"])
 			ecgChecker.checkAgainstRange(parameters["ecg"]);
 
-		if(parameters["bodyTemp"])
+
 			bodyTempChecker.checkAgainstRange(parameters["bodyTemp"]);
 
-		if(parameters["glucose"])
+
 			glucoseChecker.checkAgainstRange(parameters["glucose"]);
 
-		if(parameters["bloodPressure"])
+
 			bloodPressureChecker.checkAgainstRange(parameters["bloodPressure"]);
 
-		if(parameters["eeg"])
+
 			eegChecker.checkAgainstRange(parameters["eeg"]);
 
-		if(parameters["heartRate"])
 			heartRateChecker.checkAgainstRange(parameters["heartRate"]);
     }
 };
